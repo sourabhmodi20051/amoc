@@ -15,19 +15,23 @@ start(MyId) ->
     do_start(xmpp_or_rest(MyId), MyId).
 
 do_start(rest, MyId) ->
-    AuthHeader = auth_header(MyId),
-    send_message(AuthHeader, MyId - 1),
+    lager:warning("Rest"),
+    %AuthHeader = auth_header(MyId),
+    %send_message(AuthHeader, MyId - 1),
     ok;
+
 do_start(xmpp, MyId) ->
-    ExtraProps = [{received_stanza_handlers, [fun log_message/2]}],
+    lager:warning("XMPP"),
+    ok;
+    %ExtraProps = [{received_stanza_handlers, [fun log_message/2]}],
 
-    {ok, Client, _} = amoc_xmpp:connect_or_exit(MyId, ExtraProps),
+    %{ok, Client, _} = amoc_xmpp:connect_or_exit(MyId, ExtraProps),
 
-    escalus_session:send_presence_available(Client),
+    %escalus_session:send_presence_available(Client),
 
-    escalus_connection:wait_forever(Client),
+    %escalus_connection:wait_forever(Client),
 
-    escalus_connection:stop(Client).
+    %escalus_connection:stop(Client).
 
 log_message(_Client, Stanza) ->
     lager:warning("~p", [Stanza]),
