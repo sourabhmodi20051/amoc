@@ -2,6 +2,7 @@
 
 -export([connect_or_exit/1]).
 -export([connect_or_exit/2]).
+-export([default_user_spec/2]).
 -export([pick_server/1]).
 
 %% @doc connects and authenticates a user with given id and additional properties
